@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-6 col-sm-12">
+    <h2><%= position.employer %></h2>
+
+    <dl class="row">
+      <dt class="col-3 col-md-1">Title</dt>
+      <dd class="col-9 col-md-11"><%= position.title %></dd>
+      <dt class="col-3 col-md-1">Location</dt>
+      <dd class="col-9 col-md-11"><%= position.location %></dd>
+      <dt class="col-3 col-md-1">Source</dt>
+      <dd class="col-9 col-md-11"><%= position.source %></dd>
+      <dt class="col-3 col-md-1">Status</dt>
+      <dd class="col-9 col-md-11"><%= position.status %></dd>
+      <dt class="col-3 col-md-1">Url</dt>
+      <dd class="col-9 col-md-11"><%= link_to(position.url, position.url) %></dd>
+    </dl>
+
+    <%= link_to('Add New Event', new_position_event_path(position)) %>
+    <table>
+      <tbody>
+      <% position.events.order(event_on: :desc).each do |event| %>
+        <tr>
+          <td><%= event.description %></td>
+          <td><%= event.event_on %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

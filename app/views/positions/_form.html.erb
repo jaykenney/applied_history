@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-md-4 col-sm-6 col-xs-12">
+    <%= form_for position, builder: BootstrapFormBuilder do |position_form| %>
+      <fieldset>
+        <%= position_form.text_field :title %>
+        <%= position_form.text_field :employer %>
+        <%= position_form.text_field :location %>
+        <%= position_form.text_field :source %>
+        <%= position_form.select :status, status_types %>
+        <%= position_form.text_field :url %>
+      </fieldset>
+      <%= position_form.submit %>
+    <% end %>
+  </div>
+</div>

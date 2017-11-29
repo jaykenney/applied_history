@@ -1,1 +1,7 @@
 en:
+  activerecord:
+    attributes:
+      event:
+        event_on: Event On
+      position:
+        url: URL
