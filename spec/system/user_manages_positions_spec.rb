@@ -55,4 +55,18 @@ RSpec.feature 'User manages positions' do
 
     expect(page).to_not have_content 'Lunar Land'
   end
+
+  scenario 'User edits an event for a position' do
+    FactoryBot.create(:position, :with_event, employer: 'Lunar Land', event_description: 'Submitted Resume')
+    visit '/'
+    click_on 'Lunar Land'
+    click_on 'Submitted Resume'
+
+    fill_in 'Event On', with: '1/12/12'
+
+    click_on 'Update Event'
+
+    expect(page).to have_content '2012-01-12'
+  end
+
 end

@@ -31,4 +31,26 @@ RSpec.describe 'Position Events' do
       expect(position.events.count).to  eq(0)
     end
   end
+
+  describe 'PATCH /positions/:position_id/events/:id' do
+    let(:event) { FactoryBot.create(:event, position: position) }
+
+    it 'should redirect to position when params are valid' do
+      patch("/positions/#{position.id}/events/#{event.id}",
+        params: { event: { description: 'E' }})
+
+      expect(response).to have_http_status(:redirect)
+
+      expect(position.events.where(description: 'E').count).to eq(1)
+    end
+
+    it 'should re-render the template when params are invalid' do
+      patch("/positions/#{position.id}/events/#{event.id}",
+        params: { event: { description: '' }})
+
+      expect(response).to have_http_status(:ok)
+
+      expect(position.events.where(description: '').count).to eq(0)
+    end
+  end
 end

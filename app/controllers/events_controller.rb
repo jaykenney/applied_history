@@ -13,6 +13,19 @@ class EventsController < ApplicationController
     end
   end
 
+  def edit
+    render locals: { event: find_event }
+  end
+
+  def update
+    event = find_event
+
+    if event.update_attributes(event_params)
+      redirect_to position
+    else
+      render locals: { event: event }, action: :edit
+    end
+  end
   private
 
   def event_params
@@ -20,6 +33,10 @@ class EventsController < ApplicationController
       :description,
       :event_on
     )
+  end
+
+  def find_event
+    position.events.find params.require(:id)
   end
 
   def position

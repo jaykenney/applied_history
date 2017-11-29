@@ -18,11 +18,12 @@
     <%= link_to('Edit', [:edit, position]) %> |
     <%= link_to('Delete', position, method: :delete) %> |
     <%= link_to('Add New Event', new_position_event_path(position)) %>
+
     <table>
       <tbody>
       <% position.events.order(event_on: :desc).each do |event| %>
         <tr>
-          <td><%= event.description %></td>
+          <td><%= link_to(event.description, [:edit, position, event]) %></td>
           <td><%= event.event_on %></td>
         </tr>
       <% end %>
