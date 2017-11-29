@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.feature 'User adds an employment search action' do
+RSpec.feature 'User manages positions' do
 
-  scenario 'User adds a resume submission via a website' do
+  scenario 'User adds a position' do
     visit '/'
 
     click_on 'Add Position'
@@ -15,6 +15,18 @@ RSpec.feature 'User adds an employment search action' do
 
     click_on 'Create Position'
 
+    expect(page).to have_content 'Whaler on the Moon'
+    expect(page).to have_content 'Lunar Land'
+    expect(page).to have_content 'Indeed Website'
+    expect(page).to have_content 'www.indeed.com/blah/blah/moo.asp'
+  end
+
+  scenario 'User adds an event to a position and changes its status' do
+    FactoryBot.create(:position, employer: 'Lunar Land')
+
+    visit '/'
+    click_on 'Lunar Land'
+
     click_on 'Add New Event'
     fill_in 'Description', with: 'Submitted Resume'
 
@@ -22,11 +34,15 @@ RSpec.feature 'User adds an employment search action' do
 
     click_on 'Create Event'
 
-    expect(page).to have_content 'Whaler on the Moon'
+    click_on 'Edit'
+
+    select 'In Progress', from: 'Status'
+
+    click_on 'Update Position'
+
     expect(page).to have_content 'Lunar Land'
-    expect(page).to have_content 'Indeed Website'
-    expect(page).to have_content 'www.indeed.com/blah/blah/moo.asp'
-    expect(page).to have_content 'Pending'
+    expect(page).to have_content 'In Progress'
+    expect(page).to have_content 'Submitted Resume'
     expect(page).to have_content '2017-11-21'
   end
 end

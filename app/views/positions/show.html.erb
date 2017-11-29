@@ -10,11 +10,12 @@
       <dt class="col-3 col-md-1">Source</dt>
       <dd class="col-9 col-md-11"><%= position.source %></dd>
       <dt class="col-3 col-md-1">Status</dt>
-      <dd class="col-9 col-md-11"><%= position.status %></dd>
+      <dd class="col-9 col-md-11"><%= position.status.titleize %></dd>
       <dt class="col-3 col-md-1">Url</dt>
       <dd class="col-9 col-md-11"><%= link_to(position.url, position.url) %></dd>
     </dl>
 
+    <%= link_to('Edit', [:edit, position]) %> |
     <%= link_to('Add New Event', new_position_event_path(position)) %>
     <table>
       <tbody>

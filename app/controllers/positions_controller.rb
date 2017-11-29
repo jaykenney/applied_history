@@ -1,6 +1,14 @@
 class PositionsController < ApplicationController
   helper_method :status_types
 
+  def index
+    render locals: { positions: Position.by_status.by_employer }
+  end
+
+  def show
+    render locals: { position: find_position }
+  end
+
   def new
     render locals: { position: Position.new }
   end
@@ -15,10 +23,19 @@ class PositionsController < ApplicationController
     end
   end
 
-  def show
+  def edit
     render locals: { position: find_position }
   end
 
+  def update
+    position = find_position
+
+    if position.update(position_params)
+      redirect_to position
+    else
+      render locals: { position: position }, action: :edit
+    end
+  end
   private
 
   def find_position

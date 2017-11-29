@@ -1,1 +1,16 @@
-<%= link_to 'Add Position', new_position_path %>
+<div class="row">
+  <div class="col-xs-12 col-md-9">
+    <%= link_to 'Add Position', new_position_path %>
+
+    <table>
+      <tbody>
+        <%= positions.each do |position| %>
+          <tr>
+            <td><%= link_to(position.employer, position) %></td>
+            <td><%= position.status %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

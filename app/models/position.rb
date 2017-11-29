@@ -11,4 +11,11 @@ class Position < ApplicationRecord
 
   validates :employer,  presence: true, uniqueness: { scope: :title }
   validates :title,     presence: true
+
+  scope :by_status, -> {
+    order(arel_table[:status].in([2,4]))
+  }
+
+  scope :by_employer, -> { order(:employer) }
+
 end

@@ -48,4 +48,25 @@ RSpec.describe 'Positions' do
 
     specify { expect(response).to have_http_status(:ok) }
   end
+
+  describe 'PATCH /positions/:id' do
+    let(:position) { FactoryBot.create(:position) }
+
+    it 'should redirect to position when params are valid' do
+      patch("/positions/#{position.id}", params: { position: { status: 'in_progress' }})
+
+      expect(response).to have_http_status(:redirect)
+
+      expect(Position.in_progress.count).to eq(1)
+    end
+
+    it 'should re-render the template when params are invalid' do
+      patch("/positions/#{position.id}", params: { position: { employer: '' } })
+
+      expect(response).to have_http_status(:ok)
+
+      expect(Position.where(employer: '').count).to eq(0)
+    end
+  end
+
 end
