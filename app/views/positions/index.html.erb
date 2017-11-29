@@ -1,16 +1,27 @@
-<div class="row">
-  <div class="col-xs-12 col-md-9">
-    <%= link_to 'Add Position', new_position_path %>
+<% cache positions do %>
+  <%= breadcrumbs('Positions') %>
+  <div class="row">
+    <div class="col-xs-12 col-md-9">
+      <%= link_to 'Add Position', new_position_path %>
 
-    <table>
-      <tbody>
-        <%= positions.each do |position| %>
+      <table class="table table-striped">
+        <thead class="thead-dark">
           <tr>
-            <td><%= link_to(position.employer, position) %></td>
-            <td><%= position.status %></td>
+            <th>Employer</th>
+            <th>Status</th>
+            <th>Last Update</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% positions.each do |position| %>
+            <tr>
+              <td><%= link_to(position.employer, position) %></td>
+              <td><%= position.status %></td>
+              <td><%= position.updated_at %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
+<% end %>

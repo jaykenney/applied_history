@@ -1,38 +1,50 @@
-<div class="row">
-  <div class="col-6 col-sm-12">
-    <h2><%= position.employer %></h2>
+<% cache position do %>
+  <%= breadcrumbs(Position, position) %>
+  <div class="row">
+    <div class="col-6 col-md-4 col-sm-12">
+      <dl>
+        <dt>Employer</dt><dd><%= position.employer %></dd>
+        <dt>Title   </dt><dd><%= position.title %></dd>
+        <dt>Status  </dt><dd><%= position.status.titleize %></dd>
 
-    <dl class="row">
-      <dt class="col-3 col-md-1">Title</dt>
-      <dd class="col-9 col-md-11"><%= position.title %></dd>
-      <dt class="col-3 col-md-1">Location</dt>
-      <dd class="col-9 col-md-11"><%= position.location %></dd>
-      <dt class="col-3 col-md-1">Source</dt>
-      <dd class="col-9 col-md-11"><%= position.source %></dd>
-      <dt class="col-3 col-md-1">Status</dt>
-      <dd class="col-9 col-md-11"><%= position.status.titleize %></dd>
-      <dt class="col-3 col-md-1">Url</dt>
-      <dd class="col-9 col-md-11"><%= link_to(position.url, position.url) %></dd>
-    </dl>
+        <% if position.location? %>
+          <dt>Location</dt><dd><%= position.location %></dd>
+        <% end %>
 
-    <%= link_to('Edit', [:edit, position]) %> |
-    <%= link_to('Delete', position, method: :delete) %> |
-    <%= link_to('Add New Event', new_position_event_path(position)) %>
+        <% if position.source? %>
+          <dt>Source</dt><dd><%= position.source %></dd>
+        <% end %>
 
-    <table>
-      <tbody>
-      <% position.events.order(event_on: :desc).each do |event| %>
-        <tr>
-          <td><%= link_to(event.description, [:edit, position, event]) %></td>
-          <td><%= event.event_on %></td>
-          <td>
-            <%= link_to([position, event], method: :delete) do %>
-              Remove <%= event.description %>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
+        <% if position.url? %>
+          <dt>URL</dt><dd><%= link_to(position.url, position.url) %></dd>
+        <% end %>
+
+        <% if position.events.any? %>
+          <% cache position.events do %>
+            <dt>Events</dt>
+            <dd>
+              <table class="table table-striped">
+                <tbody>
+                  <% position.events.order(event_on: :desc).each do |event| %>
+                    <tr>
+                      <td><%= link_to(event.description, [:edit, position, event]) %></td>
+                      <td><%= event.event_on %></td>
+                      <td>
+                        <%= link_to([position, event], method: :delete) do %>
+                          Remove <%= event.description %>
+                        <% end %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </dd>
+          <% end %>
+        <% end %>
+      </dl>
+      <%= link_to('Edit', [:edit, position]) %> |
+      <%= link_to('Delete', position, method: :delete) %> |
+      <%= link_to('Add New Event', new_position_event_path(position)) %>
+    </div>
   </div>
-</div>
+<% end %>

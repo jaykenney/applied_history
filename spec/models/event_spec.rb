@@ -24,4 +24,8 @@ RSpec.describe Event, type: :model do
       expect(Event.new(event_on: '2/20/16').event_on).to eq Date.civil(2016,2,20)
     end
   end
+
+  describe '#to_s' do
+    specify { expect(Event.new(description: 'E', event_on: '2/20/16').to_s).to eq 'E on 2016-02-20' }
+  end
 end

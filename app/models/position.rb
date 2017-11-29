@@ -18,4 +18,7 @@ class Position < ApplicationRecord
 
   scope :by_employer, -> { order(:employer) }
 
+  def to_s
+    self.employer
+  end
 end

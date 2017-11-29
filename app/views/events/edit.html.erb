@@ -1,5 +1,2 @@
-<div class="row">
-  <div class="col-md-4 col-sm-6 col-xs-12">
-    <%= render 'form', event: event %>
-  </div>
-</div>
+<%= breadcrumbs(Position, event.position, event) %>
+<%= render 'form', event: event %>

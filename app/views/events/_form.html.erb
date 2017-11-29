@@ -1,7 +1,11 @@
-<%= form_for [event.position, event], builder: BootstrapFormBuilder do |event_form| %>
-  <fieldset>
-    <%= event_form.text_field :description %>
-    <%= event_form.text_field :event_on %>
-  </fieldset>
-  <%= event_form.submit %>
-<% end %>
+<div class="row">
+  <div class="col-md-4 col-sm-6 col-xs-12">
+    <%= form_for [event.position, event], builder: BootstrapFormBuilder do |event_form| %>
+      <fieldset>
+        <%= event_form.text_field :description %>
+        <%= event_form.text_field :event_on %>
+      </fieldset>
+      <%= event_form.submit %>
+    <% end %>
+  </div>
+</div>

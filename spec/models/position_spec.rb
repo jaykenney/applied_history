@@ -19,4 +19,8 @@ RSpec.describe Position, type: :model do
       expect(Position.new).to be_pending
     end
   end
+
+  describe '#to_s' do
+    specify { expect(Position.new(employer: 'E').to_s).to eq 'E' }
+  end
 end
