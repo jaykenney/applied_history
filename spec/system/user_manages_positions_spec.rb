@@ -45,4 +45,14 @@ RSpec.feature 'User manages positions' do
     expect(page).to have_content 'Submitted Resume'
     expect(page).to have_content '2017-11-21'
   end
+
+  scenario 'User deletes a position' do
+    FactoryBot.create(:position, employer: 'Lunar Land')
+
+    visit '/'
+    click_on 'Lunar Land'
+    click_on 'Delete'
+
+    expect(page).to_not have_content 'Lunar Land'
+  end
 end

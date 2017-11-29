@@ -16,6 +16,7 @@
     </dl>
 
     <%= link_to('Edit', [:edit, position]) %> |
+    <%= link_to('Delete', position, method: :delete) %> |
     <%= link_to('Add New Event', new_position_event_path(position)) %>
     <table>
       <tbody>

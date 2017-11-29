@@ -69,4 +69,14 @@ RSpec.describe 'Positions' do
     end
   end
 
+  describe 'DELETE /positions/:id' do
+    let(:position) { FactoryBot.create(:position) }
+
+    it 'should delete then redirect to /positions' do
+      delete("/positions/#{position.id}")
+
+      expect(response).to       have_http_status(:redirect)
+      expect(Position.count).to eq(0)
+    end
+  end
 end

@@ -36,6 +36,13 @@ class PositionsController < ApplicationController
       render locals: { position: position }, action: :edit
     end
   end
+
+  def destroy
+    find_position.destroy
+
+    redirect_to root_path
+  end
+
   private
 
   def find_position
