@@ -25,6 +25,11 @@
         <tr>
           <td><%= link_to(event.description, [:edit, position, event]) %></td>
           <td><%= event.event_on %></td>
+          <td>
+            <%= link_to([position, event], method: :delete) do %>
+              Remove <%= event.description %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
       </tbody>

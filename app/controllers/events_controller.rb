@@ -26,6 +26,13 @@ class EventsController < ApplicationController
       render locals: { event: event }, action: :edit
     end
   end
+
+  def destroy
+    find_event.destroy
+
+    redirect_to position
+  end
+
   private
 
   def event_params

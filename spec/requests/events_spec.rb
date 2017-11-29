@@ -53,4 +53,15 @@ RSpec.describe 'Position Events' do
       expect(position.events.where(description: '').count).to eq(0)
     end
   end
+
+  describe 'DELETE /positions/:position_id/events/:id' do
+    let(:event) { FactoryBot.create(:event, position: position) }
+
+    it 'should delete then redirect to the position' do
+      delete("/positions/#{position.id}/events/#{event.id}")
+
+      expect(response).to     have_http_status(:redirect)
+      expect(Event.count).to  eq(0)
+    end
+  end
 end
