@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Position Events' do
-  let(:position) { FactoryBot.create(:position) }
+  let(:position) { FactoryBot.create(:position, user: current_user) }
 
   describe 'GET /positions/:position_id/events/new' do
     before { get "/positions/#{position.id}/events/new" }

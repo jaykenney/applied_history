@@ -37,6 +37,8 @@ class EventsController < ApplicationController
 
   private
 
+  include PositionControllerConcern
+
   def contacts
     position.contacts.by_name
   end
@@ -52,9 +54,4 @@ class EventsController < ApplicationController
   def find_event
     position.events.find params.require(:id)
   end
-
-  def position
-    @position ||= Position.find params.require(:position_id)
-  end
-
 end

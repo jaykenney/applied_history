@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Position Contacts' do
-  let(:position) { FactoryBot.create(:position) }
+  let(:position) { FactoryBot.create(:position, user: current_user) }
 
   describe 'GET /positions/:position_id/contacts' do
     before { get "/positions/#{position.id}/contacts" }

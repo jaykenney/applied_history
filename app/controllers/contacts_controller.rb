@@ -40,6 +40,8 @@ class ContactsController < ApplicationController
 
   private
 
+  include PositionControllerConcern
+
   def contact_params
     params.require(:contact).permit(
       :email,
@@ -50,9 +52,5 @@ class ContactsController < ApplicationController
 
   def find_contact
     position.contacts.find params.require(:id)
-  end
-
-  def position
-    @position ||= Position.find params.require(:position_id)
   end
 end

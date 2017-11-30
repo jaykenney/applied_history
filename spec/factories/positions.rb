@@ -1,5 +1,7 @@
 FactoryBot.define do
   factory(:position) do
+    association(:user)
+
     employer 'The Moon'
     title    'Whaler'
 

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature 'User manages positions' do
-  before { login_with(login: 'ABBA', password: 'test') }
+  before { login_with_current_user }
 
   scenario 'User adds a position' do
     visit '/'
@@ -22,7 +22,7 @@ RSpec.feature 'User manages positions' do
   end
 
   scenario 'User adds an event to a position and changes its status' do
-    FactoryBot.create(:position, employer: 'Lunar Land')
+    FactoryBot.create(:position, employer: 'Lunar Land', user: current_user)
 
     visit '/'
     click_on 'Lunar Land'
@@ -47,7 +47,7 @@ RSpec.feature 'User manages positions' do
   end
 
   scenario 'User deletes a position' do
-    FactoryBot.create(:position, employer: 'Lunar Land')
+    FactoryBot.create(:position, employer: 'Lunar Land', user: current_user)
 
     visit '/'
     click_on 'Lunar Land'
@@ -57,7 +57,7 @@ RSpec.feature 'User manages positions' do
   end
 
   scenario 'User edits an event for a position' do
-    FactoryBot.create(:position, :with_event, employer: 'Lunar Land', event_description: 'Submitted Resume')
+    FactoryBot.create(:position, :with_event, employer: 'Lunar Land', event_description: 'Submitted Resume', user: current_user)
     visit '/'
     click_on 'Lunar Land'
     click_on 'Submitted Resume'
@@ -70,7 +70,7 @@ RSpec.feature 'User manages positions' do
   end
 
   scenario 'User deletes an event from a position' do
-    FactoryBot.create(:position, :with_event, employer: 'Lunar Land', event_description: 'Submitted Resume')
+    FactoryBot.create(:position, :with_event, employer: 'Lunar Land', event_description: 'Submitted Resume', user: current_user)
 
     visit '/'
     click_on 'Lunar Land'

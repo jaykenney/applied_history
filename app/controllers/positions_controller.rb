@@ -2,7 +2,7 @@ class PositionsController < ApplicationController
   helper_method :status_types
 
   def index
-    render locals: { positions: Position.by_status.by_employer }
+    render locals: { positions: current_user.positions.by_status.by_employer }
   end
 
   def show
@@ -10,11 +10,11 @@ class PositionsController < ApplicationController
   end
 
   def new
-    render locals: { position: Position.new }
+    render locals: { position: current_user.positions.build }
   end
 
   def create
-    position = Position.new(position_params)
+    position = current_user.positions.build(position_params)
 
     if position.save
       redirect_to position
@@ -46,7 +46,7 @@ class PositionsController < ApplicationController
   private
 
   def find_position
-    Position.find params.require(:id)
+    current_user.positions.find params.require(:id)
   end
 
   def position_params

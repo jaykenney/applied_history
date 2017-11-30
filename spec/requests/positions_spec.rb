@@ -43,14 +43,14 @@ RSpec.describe 'Positions' do
 
   describe 'GET /positions/:id' do
     before do
-      get "/positions/#{FactoryBot.create(:position).id}"
+      get "/positions/#{FactoryBot.create(:position, user: current_user).id}"
     end
 
     specify { expect(response).to have_http_status(:ok) }
   end
 
   describe 'PATCH /positions/:id' do
-    let(:position) { FactoryBot.create(:position) }
+    let(:position) { FactoryBot.create(:position, user: current_user) }
 
     it 'should redirect to position when params are valid' do
       patch("/positions/#{position.id}", params: { position: { status: 'in_progress' }})
@@ -70,7 +70,7 @@ RSpec.describe 'Positions' do
   end
 
   describe 'DELETE /positions/:id' do
-    let(:position) { FactoryBot.create(:position) }
+    let(:position) { FactoryBot.create(:position, user: current_user) }
 
     it 'should delete then redirect to /positions' do
       delete("/positions/#{position.id}")
