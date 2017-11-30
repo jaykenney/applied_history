@@ -1,7 +1,7 @@
 <% cache positions do %>
   <%= breadcrumbs('Positions') %>
   <div class="row">
-    <div class="col-xs-12 col-md-9">
+    <div class="col-xs-12 col-md-6">
       <%= link_to 'Add Position', new_position_path %>
 
       <table class="table table-striped">
@@ -16,7 +16,7 @@
           <% positions.each do |position| %>
             <tr>
               <td><%= link_to(position.employer, position) %></td>
-              <td><%= position.status %></td>
+              <td><%= position.status.titleize %></td>
               <td><%= position.updated_at %></td>
             </tr>
           <% end %>
