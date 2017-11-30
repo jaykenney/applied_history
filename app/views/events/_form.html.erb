@@ -4,6 +4,7 @@
       <fieldset>
         <%= event_form.text_field :description %>
         <%= event_form.text_field :event_on %>
+        <%= event_form.collection_select :contact_id, contacts, :id, :name, { include_blank: true } %>
       </fieldset>
       <%= event_form.submit %>
     <% end %>

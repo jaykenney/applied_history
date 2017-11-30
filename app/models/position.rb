@@ -1,5 +1,8 @@
 class Position < ApplicationRecord
-  has_many :events, dependent: :destroy, inverse_of: :position
+  # Contacts has a dependent -> restrict for events, so this makes sure
+  # events are removed first.
+  has_many :events,   dependent: :destroy, inverse_of: :position
+  has_many :contacts, dependent: :destroy, inverse_of: :position
 
   enum status: {
     pending:      0,

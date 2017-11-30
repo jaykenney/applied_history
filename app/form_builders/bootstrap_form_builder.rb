@@ -1,5 +1,14 @@
 class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
 
+  def collection_select(method, collection, value_method, text_method, options = {}, html_options = {})
+    form_group do
+      [
+        label(method),
+        super(method, collection, value_method, text_method, options, html_options.reverse_merge(class: 'form-control'))
+      ].sum
+    end
+  end
+
   def select(method, choices, options = {}, html_options = {})
     form_group do
       [

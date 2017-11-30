@@ -10,7 +10,11 @@ module BreadcrumbHelper
             end
           else
             content_tag(:li, class: 'breadcrumb-item') do
-              link_to(crumb.to_s, crumb)
+              if crumb.kind_of?(Array)
+                link_to(crumb.last.to_s, crumb)
+              else
+                link_to(crumb.to_s, crumb)
+              end
             end
           end
         end.reduce(:+)

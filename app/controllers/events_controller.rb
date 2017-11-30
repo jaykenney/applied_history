@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+  helper_method :contacts
+
   def new
     render locals: { event: position.events.build }
   end
@@ -35,8 +37,13 @@ class EventsController < ApplicationController
 
   private
 
+  def contacts
+    position.contacts.by_name
+  end
+
   def event_params
     params.require(:event).permit(
+      :contact_id,
       :description,
       :event_on
     )

@@ -19,6 +19,9 @@
           <dt>URL</dt><dd><%= link_to(position.url, position.url) %></dd>
         <% end %>
 
+        <dt>Contacts</dt>
+        <dd><%= link_to('Contacts', [position, Contact]) %></dd>
+
         <% if position.events.any? %>
           <% cache position.events do %>
             <dt>Events</dt>

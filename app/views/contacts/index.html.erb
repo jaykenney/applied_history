@@ -1,0 +1,34 @@
+<%= breadcrumbs(Position, position, Contact) %>
+<div class="row">
+  <div class="col-xs-12 col-md-6">
+    <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th>Name</th>
+          <th>Contact Info</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% contacts.each do |contact| %>
+          <tr>
+            <td><%= contact.name %></td>
+            <td>
+              <% if contact.email? %>
+                <strong>Email:</strong> <%= contact.email %><br/>
+              <% end %>
+              <% if contact.phone? %>
+                <strong>Phone:</strong> <%= contact.phone %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to("Edit #{contact}",   [:edit, position, contact]) %> |
+              <%= link_to("Remove #{contact}", [position, contact], method: :delete) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= link_to('Add New Contact', new_position_contact_path(position)) %>
+  </div>
+</div>
