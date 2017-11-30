@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.feature 'User manages positions' do
+  before { login_with(login: 'ABBA', password: 'test') }
 
   scenario 'User adds a position' do
     visit '/'
-
     click_on 'Add Position'
 
     fill_in 'Title', with: 'Whaler on the Moon'

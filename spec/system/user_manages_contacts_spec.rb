@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.feature 'User manages contacts' do
+  before { login_with(login: 'ABBA', password: 'test') }
+
   let!(:position) { FactoryBot.create(:position, employer: 'The Moon') }
 
   scenario 'User adds a contact to a position' do

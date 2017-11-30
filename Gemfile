@@ -12,6 +12,7 @@ gem 'rails', '~> 5.1.4'
 gem 'bcrypt', '~> 3.1.7' # ActiveRecord#has_secure_password
 gem 'pg',     '~> 0.18'  # Database (Postgres)
 gem 'puma',   '~> 3.7'   # Rack Server
+gem 'warden', '~> 1.2.6' # Authentication
 
 # Assets
 gem 'bootstrap', '~> 4.0.0.beta2.1'
